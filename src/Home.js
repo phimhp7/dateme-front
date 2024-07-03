@@ -5,8 +5,8 @@ import "./index.css";
 
 function Home() {
 	const [buttonContent, setButtonContent] = useState("");
-	// const isConnected = localStorage.getItem("token") ? true : false;
-	const isConnected = true;
+	const isConnected = localStorage.getItem("token") ? true : false;
+	//const isConnected = true;
 	const number = localStorage.getItem("number");
 	return (
 		<div className="">
@@ -15,7 +15,7 @@ function Home() {
 			</header>
 			{isConnected ? (
 				<div>
-					<div className="flex flex-col items-center justify-center pt-10 md:gap-16 sm:gap-10">
+					<div className="flex flex-col items-center justify-center md:pt-10 sm:pt-3 md:gap-16 sm:gap-5">
 						<Link
 							to="/crush"
 							className="bg-white bg-opacity-85 text-red-600 font-bold py-8 px-12 rounded-2xl"
@@ -39,11 +39,22 @@ function Home() {
 							</p>
 						</Link>
 					</div>
-					<div className="flex flex-row gap-6 items-center justify-center md:pt-28 sm:pt-8">
-						<p className="text-2xl">Mon numéro:</p>
-						<p className="text-3xl underline decoration-4 underline-offset-auto decoration-sky-500">
-							{number}
-						</p>
+					<div className="flex flex-col md:gap-12 sm:gap-8 lg:gap-20 items-center justify-center">
+						<div className="flex flex-row gap-2 items-center justify-center md:mt-5 sm:mt-2 lg:mt-16">
+							<p className="text-2xl">Mon numéro:</p>
+							<p className="text-3xl underline decoration-4 underline-offset-auto decoration-sky-500">
+								{number}
+							</p>
+						</div>
+						<button
+							className="bg-red-600 bg-opacity-70 text-white font-bold py-1 px-12 rounded-2xl"
+							onClick={() => {
+								localStorage.clear();
+								window.location.reload();
+							}}
+						>
+							Se deconnecter
+						</button>
 					</div>
 				</div>
 			) : (

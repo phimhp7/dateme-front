@@ -1,22 +1,24 @@
 import React, { useState } from "react";
 import logo from "./ASSETS/Logo.png";
 import "./App.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "react-notifications/lib/notifications.css";
 import {
 	NotificationContainer,
 	NotificationManager,
 } from "react-notifications";
-import axios from "axios";
 
 function Register() {
+	const navigate = useNavigate();
+
 	const changePassword = (e) => {
 		e.preventDefault();
 		const id = e.target[0].value;
 		const password = e.target[1].value;
 		const newPassword = e.target[2].value;
-		console.log(id, password, newPassword);
 		axios
-			.put("https://af86-92-131-95-161.ngrok-free.app/updatepassword", {
+			.put(`${process.env.REACT_APP_BACKEND_URL}/updatepassword`, {
 				id: id,
 				id_pas: password,
 				password: newPassword,
@@ -26,6 +28,10 @@ function Register() {
 				localStorage.setItem("token", res.data.token);
 				localStorage.setItem("number", res.data.bracelet.id);
 				NotificationManager.success("Mot de passe changé avec succès");
+
+				setTimeout(() => {
+					navigate("/");
+				}, 2000);
 			})
 			.catch((err) => {
 				console.error(err);
@@ -33,40 +39,6 @@ function Register() {
 					"Erreur lors du changement de mot de passe"
 				);
 			});
-	};
-
-	const createNotification = (type) => {
-		return () => {
-			switch (type) {
-				case "info":
-					NotificationManager.info("Info message");
-					break;
-				case "success":
-					NotificationManager.success(
-						"Success message",
-						"Title here",
-						5000
-					);
-					break;
-				case "warning":
-					NotificationManager.warning(
-						"Warning message",
-						"Close after 3000ms",
-						3000
-					);
-					break;
-				case "error":
-					NotificationManager.error(
-						"Error message",
-						"Click me!",
-						5000,
-						() => {
-							alert("callback");
-						}
-					);
-					break;
-			}
-		};
 	};
 
 	return (
