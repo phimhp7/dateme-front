@@ -6,8 +6,35 @@ import {
 	NotificationContainer,
 	NotificationManager,
 } from "react-notifications";
+import axios from "axios";
 
 function Register() {
+	const changePassword = (e) => {
+		e.preventDefault();
+		const id = e.target[0].value;
+		const password = e.target[1].value;
+		const newPassword = e.target[2].value;
+		console.log(id, password, newPassword);
+		axios
+			.put("https://af86-92-131-95-161.ngrok-free.app/updatepassword", {
+				id: id,
+				id_pas: password,
+				password: newPassword,
+			})
+			.then((res) => {
+				console.log(res);
+				localStorage.setItem("token", res.data.token);
+				localStorage.setItem("number", res.data.bracelet.id);
+				NotificationManager.success("Mot de passe changé avec succès");
+			})
+			.catch((err) => {
+				console.error(err);
+				NotificationManager.error(
+					"Erreur lors du changement de mot de passe"
+				);
+			});
+	};
+
 	const createNotification = (type) => {
 		return () => {
 			switch (type) {
@@ -47,10 +74,7 @@ function Register() {
 			<header className="mt-10 mb-16 flex justify-center items-center">
 				<img src={logo} className="w-2/5" alt="logo" />
 			</header>
-			<form
-				className="w-fit mx-auto"
-				onSubmit={createNotification("success")}
-			>
+			<form className="w-fit mx-auto" onSubmit={changePassword}>
 				<div className="mb-10">
 					<label
 						htmlFor="id"
@@ -74,8 +98,8 @@ function Register() {
 						Code de bracelet
 					</label>
 					<input
-						type="id"
-						id="id"
+						type="id_password"
+						id="id_password"
 						className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 						required
 					/>

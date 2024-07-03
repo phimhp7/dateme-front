@@ -5,16 +5,17 @@ import "./index.css";
 
 function Home() {
 	const [buttonContent, setButtonContent] = useState("");
+	// const isConnected = localStorage.getItem("token") ? true : false;
 	const isConnected = true;
-	const number = "001";
+	const number = localStorage.getItem("number");
 	return (
 		<div className="">
-			<header className="mt-12 mb-10 flex justify-center items-center">
+			<header className="mt-12 md:mb-10 sm:mb-1 flex justify-center items-center">
 				<img src={logo} className="w-3/4" alt="logo" />
 			</header>
 			{isConnected ? (
 				<div>
-					<div className="flex flex-col items-center justify-center pt-28 gap-28">
+					<div className="flex flex-col items-center justify-center pt-10 md:gap-16 sm:gap-10">
 						<Link
 							to="/crush"
 							className="bg-white bg-opacity-85 text-red-600 font-bold py-8 px-12 rounded-2xl"
@@ -38,8 +39,7 @@ function Home() {
 							</p>
 						</Link>
 					</div>
-
-					<div className="flex flex-row gap-6 items-center justify-center pt-28">
+					<div className="flex flex-row gap-6 items-center justify-center md:pt-28 sm:pt-8">
 						<p className="text-2xl">Mon numéro:</p>
 						<p className="text-3xl underline decoration-4 underline-offset-auto decoration-sky-500">
 							{number}
