@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import logo from "./ASSETS/Logo.png";
 import { Link } from "react-router-dom";
 import "./index.css";
 
 function Home() {
-	const [buttonContent, setButtonContent] = useState("");
 	const isConnected = localStorage.getItem("token") ? true : false;
-	//const isConnected = true;
 	const number = localStorage.getItem("number");
+
 	return (
 		<div className="">
 			<header className="mt-12 md:mb-10 sm:mb-1 flex justify-center items-center">
@@ -20,21 +19,15 @@ function Home() {
 							to="/crush"
 							className="bg-white bg-opacity-85 text-red-600 font-bold py-8 px-12 rounded-2xl"
 						>
-							<p
-								onClick={() => setButtonContent("Coquine")}
-								className="text-2xl font-upandaway"
-							>
+							<p className="text-2xl font-upandaway">
 								J'ai un crush
 							</p>
 						</Link>
 						<Link
-							to="/crush"
+							to="/match"
 							className="bg-black bg-opacity-90 text-white font-bold py-8 px-12 rounded-2xl"
 						>
-							<p
-								onClick={() => setButtonContent("Coquine")}
-								className="text-2xl font-upandaway"
-							>
+							<p className="text-2xl font-upandaway">
 								Voir mes match(s)
 							</p>
 						</Link>
@@ -64,12 +57,7 @@ function Home() {
 						to="/register"
 						className="bg-black bg-opacity-90 text-white font-bold py-8 px-12 rounded-2xl"
 					>
-						<p
-							onClick={() => setButtonContent("Coquine")}
-							className="text-2xl font-upandaway"
-						>
-							Se connecter
-						</p>
+						<p className="text-2xl font-upandaway">Se connecter</p>
 					</Link>
 				</div>
 			)}

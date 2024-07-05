@@ -3,6 +3,7 @@ import { useIsMobile } from "./utils/isMobile";
 import { Route, Routes } from "react-router-dom";
 import Register from "./Register";
 import CrushSender from "./CrushSender";
+import MatchDisplayer from "./MatchDisplayer";
 
 function App() {
 	const isMobile = useIsMobile();
@@ -15,6 +16,7 @@ function App() {
 						<Route path="/" element={<Home />} />
 						<Route path="/crush" element={<CrushSender />} />
 						<Route path="/register" element={<Register />} />
+						<Route path="/match" element={<MatchDisplayer />} />
 					</Routes>
 				</div>
 			) : (
