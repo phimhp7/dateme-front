@@ -54,7 +54,11 @@ function MatchDisplayer() {
 
 	return (
 		<div>
-			<header className="mt-10 mb-24 flex justify-center items-center">
+			<header className="mt-10 mb-24 flex flex-col justify-center items-center">
+				<p className="text-s">
+					! Les Matchs sont remis a zéro toutes les 30min !
+				</p>
+				<p className="text-s">00h, 0H30, 1H, 1H30, 2H, 2H30 etc..</p>
 				<Link className="w-2/5" to="/">
 					<img src={logo} alt="logo" />
 				</Link>
