@@ -18,7 +18,7 @@ function CrushSender() {
 	const handleFormSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const response = await axios
+			const res = await axios
 				.put(
 					`${process.env.REACT_APP_BACKEND_URL}/sendmessage/${id_crush}`,
 					{

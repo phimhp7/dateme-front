@@ -16,7 +16,7 @@ function Register() {
 	const changePassword = (e) => {
 		e.preventDefault();
 		const id = e.target[0].value;
-		const password = e.target[1].value;
+		const password = e.target[1].value.replace(/^0+/, "");
 		const newPassword = e.target[2].value;
 		axios
 			.put(`${process.env.REACT_APP_BACKEND_URL}/updatepassword`, {
