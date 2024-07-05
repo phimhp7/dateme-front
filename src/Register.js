@@ -26,14 +26,13 @@ function Register() {
 				choice: user_choice,
 			})
 			.then((res) => {
-				console.log(res);
 				localStorage.setItem("token", res.data.token);
 				localStorage.setItem("number", res.data.bracelet.id);
 				NotificationManager.success("Mot de passe changé avec succès");
 
 				setTimeout(() => {
 					navigate("/");
-				}, 2000);
+				}, 900);
 			})
 			.catch((err) => {
 				console.error(err);

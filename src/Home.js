@@ -9,12 +9,12 @@ function Home() {
 
 	return (
 		<div className="">
-			<header className="mt-12 md:mb-10 sm:mb-1 flex justify-center items-center">
+			<header className="mt-12 md:mb-10 sm:mb-10 flex justify-center items-center">
 				<img src={logo} className="w-3/4" alt="logo" />
 			</header>
 			{isConnected ? (
 				<div>
-					<div className="flex flex-col items-center justify-center md:pt-10 sm:pt-3 md:gap-16 sm:gap-5">
+					<div className="flex flex-col items-center justify-center md:pt-10 sm:pt-3 md:gap-16 sm:gap-20">
 						<Link
 							to="/crush"
 							className="bg-white bg-opacity-85 text-red-600 font-bold py-8 px-12 rounded-2xl"
@@ -33,13 +33,13 @@ function Home() {
 						</Link>
 					</div>
 					<div className="flex flex-col md:gap-12 sm:gap-8 lg:gap-20 items-center justify-center">
-						<div className="flex flex-row gap-2 items-center justify-center md:mt-5 sm:mt-2 lg:mt-16">
+						<div className="flex flex-row gap-2 items-center justify-center md:mt-5 sm:mt-5 lg:mt-16">
 							<p className="text-2xl">Mon numéro:</p>
 							<p className="text-3xl underline decoration-4 underline-offset-auto decoration-sky-500">
 								{number}
 							</p>
 						</div>
-						<button
+						{/* <button
 							className="bg-red-600 bg-opacity-70 text-white font-bold py-1 px-12 rounded-2xl"
 							onClick={() => {
 								localStorage.clear();
@@ -47,7 +47,7 @@ function Home() {
 							}}
 						>
 							Se deconnecter
-						</button>
+						</button> */}
 					</div>
 				</div>
 			) : (

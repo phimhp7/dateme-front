@@ -3,6 +3,11 @@ import logo from "./ASSETS/Logo.png";
 import "./App.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import "react-notifications/lib/notifications.css";
+import {
+	NotificationContainer,
+	NotificationManager,
+} from "react-notifications";
 
 function CrushSender() {
 	const navigate = useNavigate();
@@ -13,18 +18,22 @@ function CrushSender() {
 	const handleFormSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const response = await axios.put(
-				`${process.env.REACT_APP_BACKEND_URL}/sendmessage/${id_crush}`,
-				{
-					message,
-					numero_client: localStorage.getItem("number"),
-					token: localStorage.getItem("token"),
-				}
-			);
-			console.log(response.data);
+			const response = await axios
+				.put(
+					`${process.env.REACT_APP_BACKEND_URL}/sendmessage/${id_crush}`,
+					{
+						message,
+						numero_client: localStorage.getItem("number"),
+						token: localStorage.getItem("token"),
+					}
+				)
+				.then((res) => {
+					NotificationManager.success("Message envoyé avec succès");
+				}, 900);
 			navigate("/");
 		} catch (error) {
 			console.error("There was an error sending the message!", error);
+			NotificationManager.error("Erreur lors de l'envoi du message");
 		}
 	};
 
@@ -74,7 +83,7 @@ function CrushSender() {
 					</div>
 					<button
 						type="submit"
-						className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+						className="sm:ml-24 md:ml-24 lg:ml-28 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
 					>
 						Envoyer
 					</button>
@@ -90,6 +99,7 @@ function CrushSender() {
 					</Link>
 				</div>
 			)}
+			<NotificationContainer />
 		</div>
 	);
 }

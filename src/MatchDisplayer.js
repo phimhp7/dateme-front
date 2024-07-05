@@ -9,7 +9,6 @@ function MatchDisplayer() {
 	const [message, setMessage] = useState("");
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const isConnected = localStorage.getItem("token") ? true : false;
-	const [count, setCount] = useState(0);
 
 	useEffect(() => {
 		const fetchMatches = async () => {
@@ -20,10 +19,6 @@ function MatchDisplayer() {
 					}/getmatches/${localStorage.getItem("number")}`
 				);
 				setMatches(response.data.matches);
-				if (count === 0) {
-					console.log(response.data.matches);
-					setCount(1);
-				}
 			} catch (error) {
 				console.error(
 					"There was an error fetching the matches!",
