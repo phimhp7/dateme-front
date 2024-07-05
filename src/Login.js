@@ -31,7 +31,10 @@ function Login() {
 				}, 900);
 			})
 			.catch((err) => {
-				console.error(err);
+				if (err.response.status === 401) {
+					NotificationManager.error("Mot de passe invalide");
+					return;
+				}
 				NotificationManager.error("Erreur lors de la connexion");
 			});
 	};
