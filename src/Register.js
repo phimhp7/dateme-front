@@ -35,7 +35,18 @@ function Register() {
 				}, 900);
 			})
 			.catch((err) => {
-				console.error(err);
+				if (err.response.status === 401) {
+					NotificationManager.error("Mot de passe invalide");
+					return;
+				}
+				if (err.response.status === 404) {
+					NotificationManager.error("Bracelet non trouvé");
+					return;
+				}
+				if (err.response.status === 400) {
+					NotificationManager.error("Bracelet déjà enregistré");
+					return;
+				}
 				NotificationManager.error(
 					"Erreur lors du changement de mot de passe"
 				);
