@@ -2,6 +2,7 @@ import Home from "./Home";
 import { useIsMobile } from "./utils/isMobile";
 import { Route, Routes } from "react-router-dom";
 import Register from "./Register";
+import Login from "./Login";
 import CrushSender from "./CrushSender";
 import MatchDisplayer from "./MatchDisplayer";
 
@@ -17,6 +18,7 @@ function App() {
 						<Route path="/crush" element={<CrushSender />} />
 						<Route path="/register" element={<Register />} />
 						<Route path="/match" element={<MatchDisplayer />} />
+						<Route path="/login" element={<Login />} />
 					</Routes>
 				</div>
 			) : (

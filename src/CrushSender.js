@@ -13,7 +13,7 @@ function CrushSender() {
 	const navigate = useNavigate();
 	const [id_crush, setIdCrush] = useState("");
 	const [message, setMessage] = useState("");
-	const isConnected = localStorage.getItem("token") ? true : false;
+	const isConnected = sessionStorage.getItem("token") ? true : false;
 
 	const handleFormSubmit = async (e) => {
 		e.preventDefault();
@@ -23,8 +23,8 @@ function CrushSender() {
 					`${process.env.REACT_APP_BACKEND_URL}/sendmessage/${id_crush}`,
 					{
 						message,
-						numero_client: localStorage.getItem("number"),
-						token: localStorage.getItem("token"),
+						numero_client: sessionStorage.getItem("number"),
+						token: sessionStorage.getItem("token"),
 					}
 				)
 				.then((res) => {
@@ -92,7 +92,7 @@ function CrushSender() {
 				<div className="flex flex-col gap-6 items-center justify-center pt-28">
 					<p className="text-2xl">Vous êtes déconnectés</p>
 					<Link
-						to="/register"
+						to="/login"
 						className="bg-black bg-opacity-90 text-white font-bold py-8 px-12 rounded-2xl"
 					>
 						<p className="text-2xl font-upandaway">Se connecter</p>

@@ -8,7 +8,7 @@ function MatchDisplayer() {
 	const [matches, setMatches] = useState([]);
 	const [message, setMessage] = useState("");
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	const isConnected = localStorage.getItem("token") ? true : false;
+	const isConnected = sessionStorage.getItem("token") ? true : false;
 
 	useEffect(() => {
 		const fetchMatches = async () => {
@@ -16,7 +16,7 @@ function MatchDisplayer() {
 				const response = await axios.get(
 					`${
 						process.env.REACT_APP_BACKEND_URL
-					}/getmatches/${localStorage.getItem("number")}`
+					}/getmatches/${sessionStorage.getItem("number")}`
 				);
 				setMatches(response.data.matches);
 			} catch (error) {
@@ -111,7 +111,7 @@ function MatchDisplayer() {
 				<div className="flex flex-col gap-6 items-center justify-center pt-28">
 					<p className="text-2xl">Vous êtes déconnectés</p>
 					<Link
-						to="/register"
+						to="/login"
 						className="bg-black bg-opacity-90 text-white font-bold py-8 px-12 rounded-2xl"
 					>
 						<p className="text-2xl font-upandaway">Se connecter</p>

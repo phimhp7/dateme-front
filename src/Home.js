@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import "./index.css";
 
 function Home() {
-	const isConnected = localStorage.getItem("token") ? true : false;
-	const number = localStorage.getItem("number");
+	const isConnected = sessionStorage.getItem("token") ? true : false;
+	const number = sessionStorage.getItem("number");
 
 	return (
 		<div className="">
@@ -54,7 +54,7 @@ function Home() {
 				<div className="flex flex-col gap-6 items-center justify-center pt-28">
 					<p className="text-2xl">Vous êtes déconnectés</p>
 					<Link
-						to="/register"
+						to="/login"
 						className="bg-black bg-opacity-90 text-white font-bold py-8 px-12 rounded-2xl"
 					>
 						<p className="text-2xl font-upandaway">Se connecter</p>
