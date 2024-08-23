@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import logo from "./ASSETS/Logo.png";
+import avater from "./ASSETS/avatar.jpg";
 import "./App.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +13,7 @@ import {
 function Register() {
 	const navigate = useNavigate();
 	const [user_choice, setUserChoice] = useState("");
+	const [profilePic, setProfilePic] = useState("");
 
 	const changePassword = (e) => {
 		e.preventDefault();
@@ -55,11 +57,14 @@ function Register() {
 
 	return (
 		<div className="">
-			<header className="mt-10 mb-16 md:mb-16 sm:mb-6 flex justify-center items-center">
+			<header className="mt-10 mb-16 md:mb-10 sm:mb-4 flex justify-center items-center">
 				<img src={logo} className="w-2/5" alt="logo" />
 			</header>
-			<form className="w-fit mx-auto" onSubmit={changePassword}>
-				<div className="mb-10 sm:mb-5">
+			<form
+				className="overflow-auto w-fit mx-auto"
+				onSubmit={changePassword}
+			>
+				<div className="mb-5 sm:mb-5">
 					<label
 						htmlFor="id"
 						className="block mb-2 text-xl text-center font-medium text-black dark:text-black"
@@ -74,7 +79,7 @@ function Register() {
 						required
 					/>
 				</div>
-				<div className="mb-10">
+				<div className="mb-5">
 					<label
 						htmlFor="password"
 						className="block mb-2 text-xl text-center font-medium text-black dark:text-black"
@@ -88,7 +93,7 @@ function Register() {
 						required
 					/>
 				</div>
-				<div className="mb-10">
+				<div className="mb-5">
 					<label
 						htmlFor="password"
 						className="block mb-2 text-xl text-center font-medium text-black dark:text-black"
@@ -103,7 +108,7 @@ function Register() {
 						required
 					/>
 				</div>
-				<div className="mb-16">
+				<div className="mb-10">
 					<label
 						htmlFor="password"
 						className="block mb-2 text-xl text-center font-medium text-black dark:text-black"

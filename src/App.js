@@ -5,6 +5,7 @@ import Register from "./Register";
 import Login from "./Login";
 import CrushSender from "./CrushSender";
 import MatchDisplayer from "./MatchDisplayer";
+import MessageDisplayer from "./Messages";
 
 function App() {
 	const isMobile = useIsMobile();
@@ -19,6 +20,10 @@ function App() {
 						<Route path="/register" element={<Register />} />
 						<Route path="/match" element={<MatchDisplayer />} />
 						<Route path="/login" element={<Login />} />
+						<Route
+							path="/messages"
+							element={<MessageDisplayer />}
+						/>
 					</Routes>
 				</div>
 			) : (

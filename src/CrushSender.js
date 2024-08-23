@@ -56,7 +56,7 @@ function CrushSender() {
 						<input
 							type="number"
 							min={1}
-							max={999}
+							max={9990}
 							id="id"
 							value={id_crush}
 							onChange={(e) => setIdCrush(e.target.value)}

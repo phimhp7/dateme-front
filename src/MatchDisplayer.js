@@ -3,11 +3,10 @@ import logo from "./ASSETS/Logo.png";
 import "./App.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import moment from "moment"; // You'll need to install this for date formatting
 
 function MatchDisplayer() {
 	const [matches, setMatches] = useState([]);
-	const [message, setMessage] = useState("");
-	const [isModalOpen, setIsModalOpen] = useState(false);
 	const isConnected = sessionStorage.getItem("token") ? true : false;
 
 	useEffect(() => {
@@ -25,19 +24,13 @@ function MatchDisplayer() {
 					error
 				);
 			}
+			console.log(matches);
 		};
 
-		fetchMatches();
-	});
-
-	const handleButtonClick = (msg) => {
-		setMessage(msg);
-		setIsModalOpen(true);
-	};
-
-	const closeModal = () => {
-		setIsModalOpen(false);
-	};
+		if (isConnected) {
+			fetchMatches();
+		}
+	}, [isConnected]);
 
 	const getEmoji = (option) => {
 		switch (option.toLowerCase()) {
@@ -54,11 +47,7 @@ function MatchDisplayer() {
 
 	return (
 		<div>
-			<header className="mt-10 mb-24 flex flex-col justify-center items-center">
-				<p className="text-s">
-					! Les Matchs sont remis a zéro toutes les 30min !
-				</p>
-				<p className="text-s">00h, 0H30, 1H, 1H30, 2H, 2H30 etc..</p>
+			<header className="mt-10 mb-10 flex flex-col justify-center items-center">
 				<Link className="w-2/5" to="/">
 					<img src={logo} alt="logo" />
 				</Link>
@@ -69,46 +58,55 @@ function MatchDisplayer() {
 						Vos matchs
 					</h1>
 					<div className="flex justify-center mt-8">
-						<table className="min-w-full border-collapse">
-							<tbody>
-								{matches.map((match, index) => (
-									<tr key={index}>
-										<td className="px-4 py-8 border text-center">
-											{match.id}
-										</td>
-										<td className="px-4 py-2 border text-center">
-											{getEmoji(match.options)}
-										</td>
-										<td className="border px-4 py-2 text-center">
-											<button
-												className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-												onClick={() =>
-													handleButtonClick(
-														match.message
-													)
-												}
-											>
-												Afficher le message
-											</button>
-										</td>
-									</tr>
-								))}
-							</tbody>
-						</table>
-
-						{isModalOpen && (
-							<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-								<div className="bg-white p-8 rounded shadow-lg relative">
-									<button
-										className="absolute top-0 right-0 mt-2 mr-2 text-gray-500 hover:text-gray-700"
-										onClick={closeModal}
-									>
-										×
-									</button>
-									<p>{message}</p>
+						<div className="w-5/6 h-72 max-w-lg mx-auto overflow-y-auto flex space-x-4">
+							{matches.map((match, index) => (
+								<div
+									key={index}
+									className="flex-shrink-0 w-4/5 h-full bg-white shadow-md rounded-lg p-4 flex flex-col justify-between"
+								>
+									<div className="items-center flex flex-col gap-5">
+										<div>
+											<p className="text-2xl rounded-full">
+												Num : {match.id}
+											</p>
+											<p className="text-sm text-center mt-10">
+												Son fruit :
+											</p>
+											<p className="text-4xl text-center">
+												{getEmoji(match.options)}
+											</p>
+										</div>
+										<div className="text-center mt-16">
+											{match.message ? (
+												<p className="text-base">
+													Vous avez envoyé :{" "}
+													{match.message}
+												</p>
+											) : (
+												<p className="text-lg">
+													Vous avez matché à :{" "}
+													{moment(
+														match.matchTime
+													).format("HH:mm")}
+												</p>
+											)}
+										</div>
+									</div>
 								</div>
-							</div>
-						)}
+							))}
+						</div>
+					</div>
+					<div className="flex flex-col justify-center mt-8">
+						<p className="text-center text-l">
+							Rappel sur les fruits:
+						</p>
+						<p className="text-center text-l mt-2">🍑 : Charo</p>
+						<p className="text-center text-l mt-px">
+							🍉 : Peut-être
+						</p>
+						<p className="text-center text-l mt-px">
+							🍓 : Sérieuse
+						</p>
 					</div>
 				</div>
 			) : (
